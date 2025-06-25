@@ -1,12 +1,12 @@
 import json
-from typing import List, Optional
+from typing import List
 from flask import Flask, request
 from flask_cors import CORS
 from dotenv import load_dotenv
 from dataclasses import dataclass
 
 app = Flask(__name__)
-CORS(app, resources={r"/rsvp": {"origins": ["https://www.jennaivan.wedding"]}})
+CORS(app, resources={r"/rsvp": {"origins": ["https://www.jennaivan.wedding, https://rsvp.locohub.io"]}})
 
 @dataclass
 class RSVPData:
@@ -44,6 +44,16 @@ def add_rsvp():
         print(e)
         return "Error writing to file", 500
     return "OK"
+
+@app.route("/rsvp", methods=["GET", "OPTIONS"])
+def get_rsvp():
+    try:
+        with open("rsvp.txt", "r") as f:
+            content = f.read()
+        return content, 200, {"Content-Type": "text/plain"}
+    except Exception as e:
+        print(e)
+        return "Error writing to file", 500
 
 
 def create_app():
