@@ -45,15 +45,15 @@ def add_rsvp():
         return "Error writing to file", 500
     return "OK"
 
-@app.route("/rsvp", methods=["GET", "OPTIONS"])
-def get_rsvp():
-    try:
-        with open("rsvp.txt", "r") as f:
-            content = f.read()
-        return content, 200, {"Content-Type": "text/plain"}
-    except Exception as e:
-        print(e)
-        return "Error writing to file", 500
+# @app.route("/rsvp", methods=["GET", "OPTIONS"])
+# def get_rsvp():
+#     try:
+#         with open("rsvp.txt", "r") as f:
+#             content = f.read()
+#         return content, 200, {"Content-Type": "text/plain"}
+#     except Exception as e:
+#         print(e)
+#         return "Error writing to file", 500
 
 
 def create_app():
